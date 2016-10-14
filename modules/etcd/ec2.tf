@@ -34,3 +34,9 @@ resource "aws_instance" "etcd" {
 resource "null_resource" "dummy_dependency" {
   depends_on = [ "aws_instance.etcd" ]
 }
+
+variable "auth_users" {
+  type = "string"
+  default = ""
+}
+

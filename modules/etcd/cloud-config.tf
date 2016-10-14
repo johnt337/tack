@@ -137,6 +137,10 @@ write-files:
       #!/bin/sh
       exec nsenter -m -u -i -n -p -t 1 -- /usr/bin/rkt "$@"
 
+  - path: /etc/kubernetes/auth/basic_auth.csv
+    content: |
+      ${basic_auth_users}
+
   - path: /etc/kubernetes/manifests/kube-apiserver.yml
     content: |
       apiVersion: v1
@@ -159,6 +163,7 @@ write-files:
           - --admission-control=SecurityContextDeny
           - --admission-control=ServiceAccount
           - --allow-privileged=true
+          - --basic-auth-file=/etc/kubernetes/auth/basic_auth.csv
           - --client-ca-file=/etc/kubernetes/ssl/ca.pem
           - --cloud-provider=aws
           - --etcd-servers=http://etcd.${ internal-tld }:2379
@@ -319,5 +324,6 @@ EOF
     region = "${ var.region }"
     service-cluster-ip-range = "${ var.service-cluster-ip-range }"
     ssl-tar = "ssl/k8s-apiserver.tar"
+    basic_auth_users = "${var.auth_users}"
   }
 }

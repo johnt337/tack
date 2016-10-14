@@ -8,18 +8,19 @@ terraform.tfvars:
 
 module.%:
 	@echo "${BLUE}❤ make $@ - commencing${NC}"
-	@time terraform apply -target $@
+	@time terraform apply --var-file=${HOME}/.kube/basic_auth.tfvars -target $@
 	@echo "${GREEN}✓ make $@ - success${NC}"
 	@sleep 5.2
 
 ## terraform apply
 apply: plan
 	@echo "${BLUE}❤ terraform apply - commencing${NC}"
-	terraform apply
+	@echo "source ${HOME}/.kube/basic_auth.tfvars"
+	terraform apply --var-file=${HOME}/.kube/basic_auth.tfvars
 	@echo "${GREEN}✓ make $@ - success${NC}"
 
 ## terraform destroy
-destroy: ; terraform destroy
+destroy: ; terraform destroy  --var-file=${HOME}/.kube/basic_auth.tfvars
 
 ## terraform get
 get: ; terraform get
@@ -31,7 +32,7 @@ init: terraform.tfvars
 plan: get init
 	terraform validate
 	@echo "${GREEN}✓ terraform validate - success${NC}"
-	terraform plan -out terraform.tfplan
+	terraform plan --var-file=${HOME}/.kube/basic_auth.tfvars -out terraform.tfplan
 
 ## terraform show
 show: ; terraform show

@@ -12,10 +12,10 @@ AWS_REGION ?= us-west-2
 COREOS_CHANNEL ?= stable
 COREOS_VM_TYPE ?= hvm
 
-CLUSTER_NAME ?= test
-AWS_EC2_KEY_NAME ?= kz8s-$(CLUSTER_NAME)
+CLUSTER_NAME ?= beta-02
+AWS_EC2_KEY_NAME ?= k8s-$(CLUSTER_NAME)
 
-INTERNAL_TLD := ${CLUSTER_NAME}.kz8s
+INTERNAL_TLD := ${CLUSTER_NAME}.k8s
 
 # CIDR_PODS: flannel overlay range
 # - https://coreos.com/flannel/docs/latest/flannel-config.html

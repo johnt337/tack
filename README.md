@@ -184,7 +184,7 @@ $ openssl x509 -text -noout -in /etc/kubernetes/ssl/k8s-etcd.pem
 
 #### ElasticSearch and Kibana
 
-To access Elasticseach and Kibana first start `kubectl proxy`.
+To access Elasticsearch and Kibana first start `kubectl proxy`.
 
 ```bash
 $ kubectl proxy
